@@ -1,0 +1,78 @@
+
+Where is the icon file loaded?? Tracking it down!
+launcher.c L629	/* Setup icon */
+button_widget_set_icon_name (BUTTON_WIDGET (launcher->button), icon);
+button-widget.c:714:button_widget_set_icon_name
+button-widget.c:157:button_widget_reload_pixbuf (ButtonWidget *button)
+panel-util.c:331:panel_load_icon (GtkIconTheme  *icon_theme,
+panel-util.c:286:panel_find_icon (GtkIconTheme  *icon_theme,
+
+monitoring used elsewere
+panel-menu-items.c:1394:	menuitem->priv->bookmarks_monitor = g_file_monitor_file
+applets/clock/system-timezone.c:211:                        priv->monitors[i] = g_file_monitor_file (file,
+mate-panel/panel-menu-items.c:1394:	menuitem->priv->bookmarks_monitor = g_file_monitor_file
+
+reload pixbuf
+button-widget.c:157:button_widget_reload_pixbuf (ButtonWidget *button)
+
+Where do we get the correct file?
+
+
+in panel_place_menu_item_finalize (GObject *object)
+...
+	if (menuitem->priv->bookmarks_monitor != NULL) {
+		g_file_monitor_cancel (menuitem->priv->bookmarks_monitor);
+		g_object_unref (menuitem->priv->bookmarks_monitor);
+	}
+	menuitem->priv->bookmarks_monitor = NULL;
+
+
+in panel_place_menu_item_init (PanelPlaceMenuItem *menuitem)
+	GFile *bookmark;
+	char  *bookmarks_filename;
+	GError *error;
+
+...
+	bookmarks_filename = g_build_filename (g_get_home_dir (),
+					       BOOKMARKS_FILENAME, NULL);
+	bookmark = g_file_new_for_path (bookmarks_filename);
+
+	error = NULL;
+	menuitem->priv->bookmarks_monitor = g_file_monitor_file
+        						(bookmark,
+        						G_FILE_MONITOR_NONE,
+        						NULL,
+        						&error);
+	if (error) {
+		g_warning ("Failed to add file monitor for %s: %s\n",
+			   bookmarks_filename, error->message);
+		g_error_free (error);
+	} else {
+		g_signal_connect (G_OBJECT (menuitem->priv->bookmarks_monitor),
+				  "changed",
+				  (GCallback) panel_place_menu_item_gtk_bookmarks_changed,
+				  menuitem);
+	}
+
+	g_object_unref (bookmark);
+	g_free (bookmarks_filename);
+
+
+
+--------------
+
+Inseart code where?
+g_signal ? 
+
+
+---
+how do reload pixbuf open the icon file?
+char *
+panel_find_icon (GtkIconTheme  *icon_theme,
+		 const char    *icon_name,
+		 gint           size)
+{
+	GtkIconInfo *info;
+	char        *retval;
+	char        *icon_no_extension;
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" >
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000"
+preserveAspectRatio="xMidYMid meet" >
+  <defs>
+    <linearGradient id="displayColor">
+      <stop offset="0" stop-color="black" />
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)"
+     fill="url(#displayColor)" stroke="none">
+    <path d="M34 606 l-34 -34 0 -252 0 -252 34 -34 34 -34 252 0 252 0 34 34 34
+	     34 0 252 0 252 -34 34 c-32 32 -38 34 -100 34 l-66 0 0 -40 0 -40 40 0 c27 0
+	     47 -7 60 -20 19 -19 20 -33 20 -220 0 -187 -1 -201 -20 -220 -19 -19 -33 -20
+	     -220 -20 -187 0 -201 1 -220 20 -19 19 -20 33 -20 220 0 187 1 201 20 220 13
+	     13 33 20 60 20 l40 0 0 40 0 40 -66 0 c-62 0 -68 -2 -100 -34z"/>
+    <path d="M287 634 c-4 -4 -7 -40 -7 -80 l0 -73 -37 -3 c-34 -3 -38 -6 -41 -32
+	     -3 -23 6 -38 44 -77 33 -34 56 -49 74 -49 18 0 41 15 74 49 38 39 47 54 44 77
+	     -3 25 -8 29 -40 32 l-37 3 -3 77 -3 77 -30 3 c-17 2 -34 0 -38 -4z"/>
+    <path d="M156 185 c-20 -30 -36 -57 -36 -60 0 -3 90 -5 200 -5 110 0 200 2
+	     200 5 0 3 -16 30 -36 60 l-37 55 -127 0 -127 0 -37 -55z"/>
+</g>
+</svg>

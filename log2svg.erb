@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<%
+require './log2matrix.rb'
+
+colormap=Hash.new("blue")
+colormap[-1]= "black"
+colormap[0]= "red"
+colormap[1]= "#4be73f"
+
+size=6
+data=build_from_stream($stdin,size)
+keys=data.keys
+
+%>
+<svg width="<%= 2+ 150*keys.length %>" height="<%=2+150*size %>">
+	<defs>
+		<rect id="shape" width="150" height="150" style="fill:inhered;stroke:pink;stroke-width:5;stroke-opacity:0.9" />		
+	</defs>
+	<%
+	size.times do |j|
+	   keys.each_index do |i|
+	      if (data[keys[i]].length>j)	  
+	%>
+	<use x="<%=1+150*i %>" y="<%= 1+150*j %>" fill="<%= colormap[data[keys[i]][j]] %>" xlink:href="#shape" /> <!-- type <%= keys[i] %> -->	<%
+	     end
+	  end
+	end
+	%>
+</svg> 
