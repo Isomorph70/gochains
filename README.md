@@ -24,9 +24,9 @@ The original version of this principle, uses a calendar and one chain
 link per day, but this application make it possible to select any
 time interval. 
 
-## Do you want to see a screnshot?
+## Do you want to see a screenshot?
 
-At the upper right in this [screen shot][screenshotlink] you can see a
+At the upper right in this [screenshot][screenshotlink] you can see a
 rectangular shape full of green, red and some blue pixels. This is
 the display of the gochains app, under it you can find a drawer full
 of task icons, the color of them indicate, if their task is done or still
@@ -78,17 +78,13 @@ task done and its value is one. Blue that the value is greater than one.
 
 1. Installed the software using git.
 
-2. Copy the data folder gochains-data to your home folder. cp gochains-data $HOME/.gochains
+2. Do a 'make install' in the shell. This will make a data folder in $HOME/.gochains-data, copy some programs to
+/usr/local/bin, and set GOCHAINSPATH and GOCHAINSDATA in $HOME/.bashrc..
 
-3. Set the environment variable GOCHAINSPATH to point to the gochains
-folder basically so the scripts can find the correct files and the GOCHAINSDATA to the data folder at $HOME/.gochains
-Look in your home folder for the .bashrc file, edit it with the changes.
+3. For each event type you want, [find][iconsearch] and download a svg image file to the folder
+type_icons.d in the new data folder at $HOME/.gochains-data. Rename it <type>_<mnemonic>.svg for example 1_exercise.svg for a exercise task.  
 
-4. For each event type you want, [find][iconsearch] and download a svg image file to the folder
-type_icons.d. Rename it <type>_<mnemonic>.svg for example 1_exercise.svg for a
-exercise task.  
-
-5. In every svg file add the following lines after the <svg .... /> line 
+4. In every svg file add the following lines after the <svg .... /> line 
 
   <defs>
     <linearGradient id="displayColor">
@@ -102,16 +98,16 @@ exercise task.
  stop-color="black" is changed and the result file is placed in the
  folder display_icons.d
  
- 6. The chains.ct crontab file where you can put in automatic call to
+ 5. The chains.ct crontab file where you can put in automatic call to
  writechainslog.sh, I use it to initialize my daily tasks. Just fill
  is as a normal crontab file, but with a call to writechainslog.sh
  <type> 0, meaning at this time a new empty chain link should be added
  the types chain.
 
-7. Now add some data to the chains.log, by executing writechainslog.sh
+6. Now add some data to the chains.log, by executing writechainslog.sh
    a couple of times.  Using types 1-5 with the value of 0. This
    should produce some icons in display_icons.d, go ahead and look at
-   with the image view 'eom'. These files you can find in the data
+   with the image viewer 'eom'. These files you can find in the data
    folder at $HOME/.gochains
 
 Next we will setup the user interface in the desktop panel, to get
@@ -119,15 +115,15 @@ full functionality, the mate-panel should be updated with code that
 make it detect icon change on disk. If you don't use the mate-panel,
 feel to investigate how to make your favorite desktop do the same.
 
-8. Add a new drawer to a panel where you want the app. Then in the
-   Drawers properties, set the icon to be display_icons.d/chains.svg,
-   this will now act as an overview display.
+7. Add a new drawer to a panel where you want the app. Then in the
+Drawers properties, set the icon to be display_icons.d/chains.svg,
+this will now act as an overview display.
 
-9. To the Drawer add a 'Custom Application Launcher' and in the
+8. To the Drawer add a 'Custom Application Launcher' and in the
  properties add a call to writechainslog.sh with a type <type> and the
  value 1 also set the icon to display_icons.d/<type>.svg
- 
- 10. Repeat step 9 for all your tasks, and you are all done.
+
+9. Repeat step 8 for all your tasks, and you are all done.
  
 ---
 [patchlink]:https://github.com/Isomorph70/mate-panel/tree/updateable-icons
